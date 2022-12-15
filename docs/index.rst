@@ -34,3 +34,21 @@ The seedbox directory is being watched by the seedbox Deluge, so when the .torre
 
 While the local machine is connected to the seedbox, it also checks another directory for any completed downloads. If it finds any that it doesn't already have, it grabs them.
 
+
+Overview of setup:
+--------------------------------
+
+First install the 4 applications using docker containers because it is easier and quicker. If you mess something up, you can easily take the container down and deal with the issue.
+    - Here is the link for Radarr's docker container from linuxserver: https://hub.docker.com/r/linuxserver/radarrm, I would recommend using network_mode = host in your docker-compose.yml file so the container can operate on the network like a normal host.
+
+Install Deluge on your seedbox, and make sure it has an SSH/SFTP server running (check port as well)
+    - My seedbox from RapidSeedbox already had Deluge up and running as well as SSH server so there wasn't much to configure here
+
+
+Log files:
+--------------------------------
+All of the log files are kept on the local machine:
+    - Upload log - keeps track of all uploaded .torrents so script doesn't send the same .torrent up multiple times
+    - Download log - keeps track of all downloaded media so script doesn't download a second copy
+    - Log - logs all of the actions of the script - uploading/downloading files, moving around the remote/seedbox filesystem via pysftp, and other things.
+
